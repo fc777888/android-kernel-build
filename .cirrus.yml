@@ -1,0 +1,38 @@
+build_task:
+  name: android kernel build
+  timeout_in: 120m
+  # trigger_type: manual
+  only_if: $CIRRUS_BRANCH == "main"
+  container:
+    image: ubuntu:20.04
+    kvm: true
+    cpu: 8
+    memory: 24G
+  env:
+    GITHUB_TOKEN: ENCRYPTED[!08f1a10e28047de002bba1e43ad4d9c41a5848ff3c24d6b814e42eaa40f64024dbad7809cb548aae0145a57ba5dea095!]
+  prepare_script:
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo apt-utils tzdata
+    - git clone https://${CIRRUS_REPO_OWNER}:${GITHUB_TOKEN}@github.com/${CIRRUS_REPO_OWNER}/aosp-build.git aosp-build
+    - mv aosp-build/compile-arm64-manifest-4.14.sh .
+    - mv aosp-build/compile-x86_64-manifest-4.14.sh .
+    - mv aosp-build/publish-x86_64-manifest-4.14.sh .
+    - mv aosp-build/publish-arm64-manifest-4.14.sh .
+  matrix:
+    - name: arm64 kernel build
+      build_script: bash ./compile-arm64-manifest-4.14.sh && bash ./publish-x86_64-manifest-4.14.sh
+    - name: x86_64 kernel build
+      build_script: bash ./compile-x86_64-manifest-4.14.sh && bash ./publish-arm64-manifest-4.14.sh
+
+run_task:
+  name: android emulator run
+  timeout_in: 120m
+  # trigger_type: manual
+  arm_container:
+    image: ubuntu:20.04
+    kvm: true
+    cpu: 8
+    memory: 24G
+  prepare_script:
+    - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo apt-utils tzdata
+    - echo done.
+    #- bash ./run-emulator.sh
