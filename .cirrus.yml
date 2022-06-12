@@ -18,9 +18,9 @@ build_task:
     - cd aosp-build && git rev-parse HEAD && cd ..
   matrix:
     - name: arm64 kernel build
-      build_script: bash ./compile-arm64-manifest-4.14.sh && bash ./publish-x86_64-manifest-4.14.sh
+      build_script: bash ./compile-arm64-manifest-4.14.sh && bash ./publish-arm64-manifest-4.14.sh
     - name: x86_64 kernel build
-      build_script: bash ./compile-x86_64-manifest-4.14.sh && bash ./publish-arm64-manifest-4.14.sh
+      build_script: bash ./compile-x86_64-manifest-4.14.sh && bash ./publish-x86_64-manifest-4.14.sh
     - name: arm64 emulator q kernel build
       build_script: bash ./compile-arm64-emulator-kernel-q.sh && bash ./publish-arm64-emulator-kernel-q.sh
     - name: x86_64 emulator q kernel build
