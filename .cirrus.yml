@@ -14,6 +14,7 @@ build_task:
     - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git curl wget sudo apt-utils tzdata
     - git clone https://${CIRRUS_REPO_OWNER}:${GITHUB_TOKEN}@github.com/${CIRRUS_REPO_OWNER}/aosp-build.git aosp-build
     - mv aosp-build/*.sh .
+    - cd aosp-build && git rev-parse HEAD && cd ..
   matrix:
     - name: arm64 kernel build
       build_script: bash ./compile-arm64-manifest-4.14.sh && bash ./publish-x86_64-manifest-4.14.sh
