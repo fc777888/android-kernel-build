@@ -12,19 +12,23 @@ build_task:
     GITHUB_TOKEN: ENCRYPTED[!955d3f2c7f14296d7a11295802fdd53d7b6d30ba3d46ef0a8017a86b74777930a07bf466946aa1856884ce54e357ee23!]
   prepare_script:
     - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo
-    - bash ./prepare.sh
     - git clone https://${CIRRUS_REPO_OWNER}:${GITHUB_TOKEN}@github.com/${CIRRUS_REPO_OWNER}/aosp-build.git aosp-build
     - mv aosp-build/*.sh .
     - cd aosp-build && git rev-parse HEAD && cd ..
+    - bash ./prepare.sh
   matrix:
     - name: arm64 kernel build
-      build_script: bash ./compile-arm64-manifest-4.14.sh && bash ./publish-arm64-manifest-4.14.sh
+      build_script: bash ./compile-arm64-manifest-4.14.sh
+      publish_script: bash ./publish-arm64-manifest-4.14.sh
     - name: x86_64 kernel build
-      build_script: bash ./compile-x86_64-manifest-4.14.sh && bash ./publish-x86_64-manifest-4.14.sh
+      build_script: bash ./compile-x86_64-manifest-4.14.sh
+      publish_script: bash ./publish-x86_64-manifest-4.14.sh
     - name: arm64 emulator q kernel build
-      build_script: bash ./compile-arm64-emulator-kernel-q.sh && bash ./publish-arm64-emulator-kernel-q.sh
+      build_script: bash ./compile-arm64-emulator-kernel-q.sh
+      publish_script: bash ./publish-arm64-emulator-kernel-q.sh
     - name: x86_64 emulator q kernel build
-      build_script: bash ./compile-x86_64-emulator-kernel-q.sh && bash ./publish-x86_64-emulator-kernel-q.sh
+      build_script: bash ./compile-x86_64-emulator-kernel-q.sh
+      publish_script: bash ./publish-x86_64-emulator-kernel-q.sh
 
 run_task:
   name: android emulator run
