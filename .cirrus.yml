@@ -34,6 +34,7 @@ run_task:
   name: android emulator run
   timeout_in: 120m
   # trigger_type: manual
+  # only_if: $CIRRUS_BRANCH == "main"
   arm_container:
     image: ubuntu:20.04
     kvm: true
