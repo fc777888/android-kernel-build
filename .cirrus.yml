@@ -29,6 +29,9 @@ build_task:
     - name: arm64 emulator q kernel build
       build_script: bash ./compile-arm64-emulator-kernel-q.sh
       publish_script: bash ./publish-arm64-emulator-kernel-q.sh
+    - name: x86_64 emulator p kernel build
+      build_script: bash ./compile-x86_64-emulator-kernel-p.sh
+      publish_script: bash ./publish-x86_64-emulator-kernel-p.sh
     - name: x86_64 emulator q kernel build
       build_script: bash ./compile-x86_64-emulator-kernel-q.sh
       publish_script: bash ./publish-x86_64-emulator-kernel-q.sh
