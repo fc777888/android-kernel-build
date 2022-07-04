@@ -1,7 +1,7 @@
 build_task:
   name: android kernel build
   timeout_in: 120m
-  # trigger_type: manual
+  trigger_type: manual
   # only_if: $CIRRUS_BRANCH == "main"
   container:
     image: ubuntu:20.04
@@ -23,6 +23,9 @@ build_task:
     - name: x86_64 kernel build
       build_script: bash ./compile-x86_64-manifest-4.14.sh
       publish_script: bash ./publish-x86_64-manifest-4.14.sh
+    - name: arm64 emulator p kernel build
+      build_script: bash ./compile-arm64-emulator-kernel-p.sh
+      publish_script: bash ./publish-arm64-emulator-kernel-p.sh
     - name: arm64 emulator q kernel build
       build_script: bash ./compile-arm64-emulator-kernel-q.sh
       publish_script: bash ./publish-arm64-emulator-kernel-q.sh
