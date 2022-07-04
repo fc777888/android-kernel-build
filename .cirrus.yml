@@ -17,18 +17,18 @@ build_task:
     - cd android-kernel-patch && git rev-parse HEAD && cd ..
     - bash ./prepare.sh
   matrix:
-    - name: arm64 common q 4.14 kernel build
+    - name: arm64 common q-4.14 kernel build
       build_script: bash ./compile-arm64-common-kernel-q-4.14.sh
       publish_script: bash ./publish-arm64-common-kernel-q-4.14.sh
-    - name: x86_64 common q 4.14 kernel build
+    - name: x86_64 common q-4.14 kernel build
       build_script: bash ./compile-x86_64-common-kernel-q-4.14.sh
       publish_script: bash ./publish-x86_64-common-kernel-q-4.14.sh
-    - name: arm64 common q 4.19 kernel build
-      build_script: bash ./compile-arm64-common-kernel-q-4.19.sh
-      publish_script: bash ./publish-arm64-common-kernel-q-4.19.sh
-    - name: x86_64 common q 4.19 kernel build
-      build_script: bash ./compile-x86_64-common-kernel-q-4.19.sh
-      publish_script: bash ./publish-x86_64-common-kernel-q-4.19.sh
+    - name: arm64 common s-5.10 kernel build
+      build_script: bash ./compile-arm64-common-kernel-s-5.10.sh
+      publish_script: bash ./publish-arm64-common-kernel-s-5.10.sh
+    - name: x86_64 common s-5.10 kernel build
+      build_script: bash ./compile-x86_64-common-kernel-s-5.10.sh
+      publish_script: bash ./publish-x86_64-common-kernel-s-5.10.sh
     - name: arm64 emulator p kernel build
       build_script: bash ./compile-arm64-emulator-kernel-p.sh
       publish_script: bash ./publish-arm64-emulator-kernel-p.sh
